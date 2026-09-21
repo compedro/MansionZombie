@@ -13,7 +13,8 @@ public class Zombie extends Personaje {
     } 
     
     @Override
-    public void combatir() {
-
+    public int combatir() {
+        int puntosAtaque = (int)(Math.random()*getPuntosAtaque())+1;
+        return puntosAtaque;
     }
 }

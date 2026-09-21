@@ -36,7 +36,7 @@ public abstract class Personaje {
         this.puntosAtaque = puntosAtaque;
     }
 
-    public abstract void  combatir();
+    public abstract int  combatir();
     
 
 }

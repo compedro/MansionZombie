@@ -9,7 +9,7 @@ public class Zombie extends Personaje {
 //    super(habitacionActual,puntosVida, puntosAtaque);
  // En el constructor se meten directamente el algoritmo en los parametros correspondientes
         public Zombie(int habitacionActual) { 
-        super(habitacionActual,(int)(Math.random()*2)+2+(habitacionActual - 1),(int)(Math.random()*2)+2+(habitacionActual - 1));   
+        super((int)(Math.random()*2)+2+(habitacionActual - 1),(int)(Math.random()*2)+2+(habitacionActual - 1));   
     } 
     
     @Override

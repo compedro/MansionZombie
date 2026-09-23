@@ -6,7 +6,7 @@ public class Superviviente extends Personaje {
     private int protecciones;
 
     public Superviviente() {
-        super(1,20, 4);
+        super(20, 4);
         this.botiquin = 0;
         this.armas = 0;
         this.protecciones = 0;

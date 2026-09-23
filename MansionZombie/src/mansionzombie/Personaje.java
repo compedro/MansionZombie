@@ -2,23 +2,23 @@ package mansionzombie;
 
 public abstract class Personaje {
 
-    private int habitacionActual;
+//    private int habitacionActual;
     private int puntosVida;
     private int puntosAtaque;
 
-    public Personaje(int habitacionActual, int puntosVida, int puntosAtaque) {
-        this.habitacionActual = habitacionActual;
+    public Personaje(int puntosVida, int puntosAtaque) {
+//        this.habitacionActual = habitacionActual;
         this.puntosVida = puntosVida;
         this.puntosAtaque = puntosAtaque;
     }
 
-    public int getHabitacionActual() {
-        return habitacionActual;
-    }
+//    public int getHabitacionActual() {
+//        return habitacionActual;
+//    }
 
-    public void setHabitacionActual(int habitacionActual) {
-        this.habitacionActual = habitacionActual;
-    }
+//    public void setHabitacionActual(int habitacionActual) {
+//        this.habitacionActual = habitacionActual;
+//    }
 
     public int getPuntosVida() {
         return puntosVida;

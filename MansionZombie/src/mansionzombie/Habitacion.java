@@ -7,7 +7,7 @@ private int intentosBusqueda;
 private int zombiesActivos;
 
 
-    public Habitacion(int idHabitacion) {
+    public Habitacion() {
         this.idHabitacion = idHabitacion;
         this.intentosBusqueda = 3;
         this.zombiesActivos = 1;
@@ -21,8 +21,6 @@ private int zombiesActivos;
         this.idHabitacion = idHabitacion;
     }
     
-    
-
     public int getIntentosBusqueda() {
         return intentosBusqueda;
     }

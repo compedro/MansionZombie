@@ -6,7 +6,7 @@ public class Juego {
     private int habitacionesMax;
     private Superviviente supervivienteActual = new Superviviente();
 
-    private Habitacion habitacionActual = new Habitacion();
+    private Habitacion habitacionActual = new Habitacion(1);
 
     public Juego(int dificultad) {
         this.dificultad = dificultad;
@@ -22,13 +22,14 @@ public class Juego {
         Zombie zombie = new Zombie(habitacionActual.getIdHabitacion());
 
         do {
-            System.out.println("Modo combate");
-            System.out.println("Datos superviviente actual:\n");
+            System.out.println("Datos del superviviente antes del combate");
+            System.out.println("--------------------------");
             System.out.println("puntosVida: " + supervivienteActual.getPuntosVida());
             System.out.println("puntosAtaque: " + supervivienteActual.getPuntosAtaque());
             System.out.println("botiquin: " + supervivienteActual.getBotiquin());
             System.out.println("armas: " + supervivienteActual.getArmas());
             System.out.println("protecciones: " + supervivienteActual.getProtecciones());
+            System.out.println("-----------------------");
             System.out.println("Combatiendo ...");
             //comienza el combate
             //aparece zombie
@@ -57,6 +58,8 @@ public class Juego {
                     System.out.println("Tus protecciones han parado el ataque totalmente");
                 } else {
                     System.out.println("Tus protecciones no han podido parar el ataque totalmente");
+                    System.out.println("Has muerto y eres fagocitado por los zombies...\n"
+                            + "GAME OVER");
                     //resultado del ataque en el superviviente
                     supervivienteActual.setPuntosVida(supervivienteActual.getPuntosVida() - ataqueZombieResultante);
                 }
@@ -95,17 +98,21 @@ public class Juego {
             } else {
                 if (tiradaBusqueda <= 90) {
                     System.out.println("Has encontrado un botiquin");
-                    if(supervivienteActual.getBotiquin()==0)
-                        supervivienteActual.setBotiquin(supervivienteActual.getBotiquin()+1);
-                    else{
+                    if (supervivienteActual.getBotiquin() == 0) {
+                        supervivienteActual.setBotiquin(supervivienteActual.getBotiquin() + 1);
+                    } else {
                         System.out.println("... pero ya tenias un botiquín y no puedes llevar mas de uno\n"
-                                + "así que lo tienes que abadonar.");}
-                    
+                                + "así que lo tienes que abadonar.");
+                    }
+
                 } else {
-                    if(tiradaBusqueda<=95){System.out.println("Has encontrado una protección!");
-                    supervivienteActual.setProtecciones(supervivienteActual.getProtecciones()+1);}
-                    else{System.out.println("Has encontrado un arma!");
-                    supervivienteActual.setArmas(supervivienteActual.getArmas()+1);}
+                    if (tiradaBusqueda <= 95) {
+                        System.out.println("Has encontrado una protección!");
+                        supervivienteActual.setProtecciones(supervivienteActual.getProtecciones() + 1);
+                    } else {
+                        System.out.println("Has encontrado un arma!");
+                        supervivienteActual.setArmas(supervivienteActual.getArmas() + 1);
+                    }
                 }
             }
         } else {
@@ -113,6 +120,39 @@ public class Juego {
                     + "todavía hay zombies activos o no te quedan intentos");
         }
 
+    }
+
+    public void usarBotiquin() {
+        if (habitacionActual.getZombiesActivos() == 0 && supervivienteActual.getBotiquin() > 0) {
+            System.out.println(" con el botiquin recuperas cuatro puntos de vida con un máximo de 20 puntos");
+            supervivienteActual.setPuntosVida(supervivienteActual.getPuntosVida() + 4);
+            supervivienteActual.setBotiquin(0);
+            if (supervivienteActual.getPuntosVida() > 20) {
+                supervivienteActual.setPuntosVida(20); // se limita al máximo los puntos de vida a 20 puntos
+            }
+        } else {
+            if (habitacionActual.getZombiesActivos() > 0) {
+                System.out.println("No puedes utilizar el botiquín hasta que no termines con los zombies de la habitación");
+            } else {
+                System.out.println("No te quedan botiquines para poder utilizar");
+            }
+        }
+    }
+
+    public void avanzar() {
+        if (habitacionActual.getZombiesActivos() == 0) {
+            int idHabitacionSuperada = habitacionActual.getIdHabitacion();
+            System.out.println("Has superadola habitacion: "+ idHabitacionSuperada +"\n");
+            Habitacion habitacionSiguiente = new Habitacion(idHabitacionSuperada + 1);
+            this.habitacionActual = habitacionSiguiente;
+
+            if (habitacionActual.getIdHabitacion() > habitacionesMax) {
+                System.out.println("Has conseguido salir vivo de la Mansion Zombie!\n"
+                        + " Enhorabuena !");
+            } else {
+                System.out.println("Has avanzado a la habitacion: " + habitacionActual.getIdHabitacion());
+            }
+        } else {System.out.println(" Aun no puedes avanzar porque quedan Zombies vivos en la habitación");}
     }
 
     public int getDificultad() {

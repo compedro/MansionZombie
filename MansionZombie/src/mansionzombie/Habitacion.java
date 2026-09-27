@@ -1,13 +1,13 @@
 package mansionzombie;
 
-public class Habitacion {
+public class Habitacion  {
 
 private int idHabitacion;    
 private int intentosBusqueda;
 private int zombiesActivos;
 
 
-    public Habitacion() {
+    public Habitacion(int idHabitacion) {
         this.idHabitacion = idHabitacion;
         this.intentosBusqueda = 3;
         this.zombiesActivos = 1;
